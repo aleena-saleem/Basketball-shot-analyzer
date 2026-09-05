@@ -46,11 +46,11 @@ Update the `cv2.VideoCapture(...)` path in `shot_detector.py` to point to this f
 
 A Streamlit dashboard provides an interactive interface for running the detector and reviewing shot statistics.
 
-![Streamlit Dashboard](./Streamlitdemo/streamlit%201..png)
+![Dashboard 1](./Streamlitdemo/Streamlit%201..png)
 
-![Dashboard View 2](./Streamlitdemo/2.png)
+![Dashboard 2](./Streamlitdemo/2..png)
 
-![Dashboard View 3](./Streamlitdemo/3.png)
+![Dashboard 3](./Streamlitdemo/3..png)
 ## Training
 
 `train.py` fine-tunes a YOLOv8n model on a Roboflow-exported dataset:
