@@ -15,11 +15,11 @@ A computer-vision system that detects a basketball and hoop in video, tracks bal
 
 ## How It Works
 
-1. **Detection** — Each frame is passed through a fine-tuned YOLOv8 model to localize the ball and hoop with bounding boxes and confidence scores.
-2. **Position Cleaning** — `clean_ball_pos` / `clean_hoop_pos` filter out physically implausible detections (sudden jumps, wrong aspect ratios) to keep tracking stable.
-3. **Shot Phase Detection** — `detect_up` identifies when the ball enters the backboard/rim region; `detect_down` identifies when it passes below the rim — together bounding a shot attempt.
-4. **Scoring Logic** — `score()` fits a line through the ball's trajectory near the rim and checks whether the predicted crossing point falls within the rim's horizontal bounds (with a rebound buffer zone) to decide make vs. miss.
-5. **Visualization** — Live overlay shows running score, make/miss text, ball trail, and a fading color flash for shot outcomes.
+**Detection** — Each frame is run through a fine-tuned YOLOv8 model; ball detections are accepted at conf > 0.3, relaxed to conf > 0.15 within in_hoop_region to preserve recall near the rim, while hoop detections require conf > 0.5.
+**Position Cleaning** — clean_ball_pos/clean_hoop_pos reject outliers using a motion-consistency check (displacement > 4×√(w²+h²) within 5 frames) and an aspect-ratio check (w > 1.4h or h > 1.4w), discarding non-circular or teleporting detections.
+**Shot Phase Detection** — detect_up flags entry into a region spanning ±4× hoop width and 2× hoop height above the rim; detect_down flags a y-crossing 0.5× hoop-height below center — a two-state FSM bounding each attempt.
+**Scoring Logic** — score() fits a first-order polynomial (np.polyfit) to the ball's last pre-rim and post-rim points, extrapolates the x-position at rim height, and checks it against ±0.4× hoop-width bounds plus a 10px rebound-tolerance buffer to classify make/miss.
+**Visualization** — Live overlay renders running score, make/miss text, and ball trail, with shot outcomes signaled via an alpha-blended color flash (cv2.addWeighted) that decays linearly over 20 frames.
 
 ## Project Structure
 
@@ -40,7 +40,6 @@ In addition to the bundled sample clip, the system has been validated against a 
 [Watch the real-world test video](./Streamlitdemo/TEST%20VIDEO.mp4)
 ```
 
-Update the `cv2.VideoCapture(...)` path in `shot_detector.py` to point to this file to reproduce the results shown below.
 
 ## Dashboard
 
