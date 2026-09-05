@@ -1,0 +1,67 @@
+# ── Python ──────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ── Virtual environments ─────────────────────────────
+venv/
+.venv/
+env/
+ENV/
+
+# ── YOLO training outputs ────────────────────────────
+runs/
+Yolo-Weights/
+
+# ── Model weights (large binary files) ───────────────
+# Keep best.pt tracked (it's the pre-trained model for this repo).
+# Ignore any other .pt/.pth files generated during training.
+*.pth
+!best.pt
+
+# ── Videos ───────────────────────────────────────────
+# Keep the demo video, ignore everything else
+*.mp4
+*.avi
+*.mov
+*.mkv
+!video_test_5.mp4
+
+# ── Generated output videos ──────────────────────────
+*_output.mp4
+*_output.avi
+Recording*.mp4
+Recording*.avi
+
+# ── Streamlit cache & secrets ────────────────────────
+.streamlit/secrets.toml
+.streamlit/cache/
+
+# ── OS artifacts ─────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── IDEs ─────────────────────────────────────────────
+.vscode/
+.idea/
+*.suo
+*.user
+
+# ── Jupyter ──────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ── Logs & temp ──────────────────────────────────────
+*.log
+*.tmp
+*.temp
+tmp/
+temp/
