@@ -15,11 +15,11 @@ A computer-vision system that detects a basketball and hoop in video, tracks bal
 
 ## How It Works
 
-**Detection** — Each frame is run through a fine-tuned YOLOv8 model; ball detections are accepted at conf > 0.3, relaxed to conf > 0.15 within in_hoop_region to preserve recall near the rim, while hoop detections require conf > 0.5.
-**Position Cleaning** — clean_ball_pos/clean_hoop_pos reject outliers using a motion-consistency check (displacement > 4×√(w²+h²) within 5 frames) and an aspect-ratio check (w > 1.4h or h > 1.4w), discarding non-circular or teleporting detections.
-**Shot Phase Detection** — detect_up flags entry into a region spanning ±4× hoop width and 2× hoop height above the rim; detect_down flags a y-crossing 0.5× hoop-height below center — a two-state FSM bounding each attempt.
-**Scoring Logic** — score() fits a first-order polynomial (np.polyfit) to the ball's last pre-rim and post-rim points, extrapolates the x-position at rim height, and checks it against ±0.4× hoop-width bounds plus a 10px rebound-tolerance buffer to classify make/miss.
-**Visualization** — Live overlay renders running score, make/miss text, and ball trail, with shot outcomes signaled via an alpha-blended color flash (cv2.addWeighted) that decays linearly over 20 frames.
+**1.Detection** — Each frame is run through a fine-tuned YOLOv8 model; ball detections are accepted at conf > 0.3, relaxed to conf > 0.15 within in_hoop_region to preserve recall near the rim, while hoop detections require conf > 0.5.
+**2.Position Cleaning** — clean_ball_pos/clean_hoop_pos reject outliers using a motion-consistency check (displacement > 4×√(w²+h²) within 5 frames) and an aspect-ratio check (w > 1.4h or h > 1.4w), discarding non-circular or teleporting detections.
+**3.Shot Phase Detection** — detect_up flags entry into a region spanning ±4× hoop width and 2× hoop height above the rim; detect_down flags a y-crossing 0.5× hoop-height below center — a two-state FSM bounding each attempt.
+**4.Scoring Logic** — score() fits a first-order polynomial (np.polyfit) to the ball's last pre-rim and post-rim points, extrapolates the x-position at rim height, and checks it against ±0.4× hoop-width bounds plus a 10px rebound-tolerance buffer to classify make/miss.
+**5.Visualization** — Live overlay renders running score, make/miss text, and ball trail, with shot outcomes signaled via an alpha-blended color flash (cv2.addWeighted) that decays linearly over 20 frames.
 
 ## Project Structure
 
