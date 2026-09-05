@@ -46,8 +46,10 @@ Update the `cv2.VideoCapture(...)` path in `shot_detector.py` to point to this f
 
 A Streamlit dashboard provides an interactive interface for running the detector and reviewing shot statistics.
 
-![Streamlit Dashboard](./Streamlitdemo/streamlit 1..png)
+![Streamlit Dashboard](./Streamlitdemo/streamlit%201..png)
+
 ![Dashboard View 2](./Streamlitdemo/2.png)
+
 ![Dashboard View 3](./Streamlitdemo/3.png)
 ## Training
 
