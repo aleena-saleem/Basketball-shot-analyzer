@@ -37,7 +37,7 @@ A computer-vision system that detects a basketball and hoop in video, tracks bal
 In addition to the bundled sample clip, the system has been validated against a real-world recorded shooting session:
 
 ```
-"D:\AI-Basketball-Shot-Detection-Tracker-master\Streamlitdemo\TEST VIDEO.mp4"
+[Watch the real-world test video](./Streamlitdemo/TEST%20VIDEO.mp4)
 ```
 
 Update the `cv2.VideoCapture(...)` path in `shot_detector.py` to point to this file to reproduce the results shown below.
@@ -46,9 +46,9 @@ Update the `cv2.VideoCapture(...)` path in `shot_detector.py` to point to this f
 
 A Streamlit dashboard provides an interactive interface for running the detector and reviewing shot statistics.
 
-![Streamlit Dashboard](Streamlitdemo/streamlit 1..png)
-![Dashboard View 2](Streamlitdemo/2.png)
-![Dashboard View 3](Streamlitdemo/3.png)
+![Streamlit Dashboard](./Streamlitdemo/streamlit 1..png)
+![Dashboard View 2](./Streamlitdemo/2.png)
+![Dashboard View 3](./Streamlitdemo/3.png)
 ## Training
 
 `train.py` fine-tunes a YOLOv8n model on a Roboflow-exported dataset:
